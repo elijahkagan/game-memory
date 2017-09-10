@@ -1,0 +1,44 @@
+<!doctype html>
+<html >
+<head>
+	<meta charset="utf-8">
+  	<meta http-equiv="x-ua-compatible" content="ie=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <script src="js/jquery.min.js"></script>
+<body id="game">
+<div class="game_parent_container">
+  <div id="screen_welcome" class="container_centered" >
+    
+    <div >
+      <p>Hello, lets play Memory</p>
+      <p>CHOOSE THE DIFFICULTY LEVEL</p>   
+      <ul class="difficulties">
+
+      <li class="difficulty_button" difficulty="kid">1</li>
+      <li class="difficulty_button" difficulty="expirienced">2</li> 
+      <li class="difficulty_button" difficulty="unicorn">3</li>
+      </ul>
+    </div>
+
+  </div>
+  <div id="screen_game" class="game_child_container hide"> 
+    <ul id="game_board" class="memory_cards_container">
+    </ul>
+    <p id="tip_message"></p>
+  </div>
+  <div id="screen_results" class="container_centered hide">
+    <p>you won/  your points </p>
+    <div class="play_again">play again?</div>
+  </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/game.js"></script>
+<footer></footer>
+</body>
+</html>

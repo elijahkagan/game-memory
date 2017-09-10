@@ -1,0 +1,154 @@
+/* Containers */
+#game {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	flex-grow: 1;
+	flex-shrink: 1;
+	font-family: 'Lato', sans-serif;
+	background: #2B3139;
+}
+
+li {
+
+}
+
+.game_parent_container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	flex-grow: 0;
+	flex-shrink: 0;
+	justify-content: center;
+	align-items: center;
+}
+
+.container_centered {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	height: 50%;
+	flex-grow: 0;
+	flex-shrink: 0;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	background: #3D4B51;
+	text-align: center;
+	color: #50E3C2;
+
+}
+
+.game_child_container {
+	display: flex;
+	width: 242px;
+	height: 242px;
+	padding: 24px;
+	flex-grow: 0;
+	background: #3D4B51;
+	align-self: center;
+	box-shadow: 0 4px 4px 4px #282B30;
+	border-radius: 4px;
+}
+
+.memory_cards_container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	flex-wrap: wrap;
+	background: #3D4B51;
+	border-radius: 4px;	
+	justify-content: space-around;
+}
+
+.memory_card_iteration {
+	display: inline-flex;
+	width: 22%;
+	height: 22%;
+	border-radius: 4px;	
+	background: #2C3139;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.22s ease-out;
+}
+
+.memory_card_iteration:hover {
+	/*border: 1px solid #50E3C2;*/
+	background: #262A32;
+}
+
+.difficulty_button,
+.play_again {
+	display: inline-flex;
+	width: 48px;
+	height: 48px;
+	border-radius: 4px;	
+	background: #2C3139;
+	align-self: center;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #2C3139;
+	color: #3D4B51;
+	transition: all 0.22s ease-out;
+}
+.play_again {
+	width: 50%;
+}
+
+
+.play_again:hover,
+.difficulty_button:hover {
+	/*border: 1px solid #50E3C2;*/
+	color: #50E3C2;
+	background: #262A32;
+}
+
+.difficulties {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	justify-content: center;
+}
+
+.difficulties .difficulty_button {
+	margin: 5px;
+} 
+
+/* Memory Card States */
+
+.selected,
+.selected:hover {
+	/*transition: background 0.1s ease-out;*/
+	/*animation: clickme 0.2s 1 ;*/
+	background: #9012FE;
+}
+
+
+.hide {
+	display: none;
+}
+/*@keyframes clickme {
+    0% {
+        background: : #50E3C2;
+    }
+   100% {
+        background: #9012FE;
+    }
+    70% {
+        opacity: .9;
+        border-color: #8CC396;
+    }
+    80%{
+        opacity: .4;
+    }
+    100% {
+        transform: rotate(-45deg) translate(-90px, 90px) scale(4);
+        opacity: 0;
+        border-color: #fff;
+    }
+}*/
