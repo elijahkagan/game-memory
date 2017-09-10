@@ -1,18 +1,20 @@
 <!doctype html>
-<html >
+<html>
 <head>
- <meta charset="utf-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Memory Game</title>
- <link rel="stylesheet" href="css/style.css">
- <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"> 
- <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
- <link rel="icon" href="images/favicon.ico" type="image/x-icon">
- <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
- <script src="js/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Game</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"> 
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="src/favicon.ico" type="image/x-icon">
+  <script src="js/jquery.min.js"></script>
 </head>
 <body class="game game_backgrounds">
+  <!-- Main game container --> 
   <div class="game_parent_container">
+    <!-- Welcome screen -->
     <div id="screen_welcome" class="screen container_centered" >
       <div class="helper">
         <p class="welcome_text">LET'S PLAY</p>
@@ -47,24 +49,22 @@
           <li class="difficulty_button unicorn" data-difficulty="unicorn">3</li>
         </ul>
       </div>
-
     </div>
+    <!-- Gameboard screen -->
     <div id="screen_game" class="screen hide">
-
       <div class="container_game_info">
         <p id="points" class="game_info">Points: 0</p>
         <p class="reset_game fa fa-refresh"></p>
         <p id="moves" class="game_info">Moves: 0</p>
       </div>
-
       <div class="game_child_container"> 
         <ul id="game_board" class="memory_cards_container">
         </ul>
       </div>
       <p id="tip" class="tip_message"></p>
     </div>
-
-    <div id="screen_results" class="screen container_centered container--padded hide">
+    <!-- Results screen -->
+    <div id="screen_results" class="screen container_centered container-padded hide">
       <ul class="stars_container">
         <li class="stars fa-star"></li>
         <li class="stars fa-star"></li>
@@ -87,17 +87,18 @@
           </g>
         </g>
       </svg>
-
       <p class="winner_text">by matching them all!</p>
       <p class="final_result_container"></p>
-      <div class="play_again">play again?</div>
+      <div class="play_again_button">play again?</div>
     </div>
   </div>
+  <!-- Footer -->
   <footer class="footer">
     <p class="copyrights">by e.kagan, be creative</p>
   </footer>
-   <script src="js/symbols.js"></script>
-   <script src="js/memory.js"></script>
+  <!-- Scripts -->
+  <script src="js/symbols.js"></script>
+  <script src="js/memory.js"></script>
   <script src="js/game.js"></script>
 </body>
 </html>

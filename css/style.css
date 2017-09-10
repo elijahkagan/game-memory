@@ -1,23 +1,13 @@
-/* containers */
-.game {
-	font-family: 'lato', sans-serif ;
-	display: flex ;
-	width: 100% ;
-	height: 100vh ;
-	margin: 0 ;
-	padding: 0 ;
-	flex-grow: 1 ;
-	flex-shrink: 1 ;
-	font-family: 'lato', sans-serif ;
-	background-color: #2b3139 ;
-}
+/** TOC
 
-.game_backgrounds {
-	background: url( "../src/memory_letters_background.svg" ) center center / 78% no-repeat ,
-				url( "../src/memory_squares_background.svg" ) center center / 50% no-repeat ;
-	background-color: #2b3139 ;			
+ 1. Global classes
+ 2. Transition classes
+ 3. View specific classes
+ 4. Animations 
 
-}	
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/* Global Classes */
 
 p {
 	margin: 0;
@@ -27,80 +17,31 @@ p {
 li {
 	font-family: 'fontawesome' ;
 	font-size: 16px ;
-	margin: 0;
-	padding: 0;
-}
-
-a { 
-	font-size: 33px ;
-	color: #50e3c2 ;
-}
-
-.welcome_text {
-	font-size: 14px ;
-	color: #0b97ac ;
-}
-.winner_text {
-	font-size: 22px ;
-	font-weight: 900 ;
-	height: 33px;
-	color: #e3d4a6 ;
-}
-
-.footer {
-	display: flex ;
-	position: absolute ;
-	width: 100% ;
-	bottom: 5px ;
-	left: 0 ;
-	justify-content: center ;
-}
-
-.stars_container {
-	width: 144px ;
-	display: flex ;
-	justify-content: space-around ;
 	margin: 0 ;
-	padding: 0 ; 
+	padding: 0 ;
 }
 
-.stars {
-	list-style: none ;
-	font-size: 22px ;
-	color: #2c3139 ;
+a {
+	font-size: 33px ;
 }
 
-.stars--gold {
-	animation: bump 0.3s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
-	color: gold ;
-}
-.copyrights {
-	color: rgba( 83 , 89 , 98 , 1 );
-	text-align: center ;
-	bottom: 5px ;
-	font-size: 11px ;
-	font-weight: 300 ;
-}
-
-.big_letter {
-	transition: all 0.2s ease-out ;
+.game {
+	font-family: 'lato', sans-serif ;
+	display: flex ;
+	width: 100% ;
+	height: 100vh ;
+	margin: 0 ;
+	padding: 0 ;
+	flex-grow: 1 ;
+	flex-shrink: 1 ;
+	background-color: #2b3139 ;
 }
 
-.waved,
-.big_letter:hover {
-    transform: translatey( 20px ); 
-}
+.game_backgrounds {
+	background: url( "../src/memory_letters_background.svg" ) center center / 78% no-repeat ,
+				url( "../src/memory_squares_background.svg" ) center center / 50% no-repeat ;
+	background-color: #2b3139 ;
 
-.shifted_down {
-	transform: translatey( 900px );
-	height: 0 ;
-	opacity: 0 ;
-}
-
-.move_up {
-	transition: all 0.3s ease-out ;
-	transform: translatey( -900px );
-	opacity: 0 ;
 }
 
 .game_parent_container {
@@ -111,6 +52,10 @@ a {
 	flex-shrink: 0 ;
 	justify-content: center ;
 	align-items: center ;
+}
+
+.screen {
+	transition: all 0.3s ease-out ;
 }
 
 .container_centered {
@@ -129,15 +74,133 @@ a {
 	align-content: center ;
 	background-color:rgba( 61 , 75 , 81 , 0.51 ) ;
 	text-align: center ;
-	color: #50e3c2 ;
 }
 
-.container--padded {
- 	padding-top: 30px ;
+.footer {
+	display: flex ;
+	position: absolute ;
+	width: 100% ;
+	bottom: 5px ;
+	left: 0 ;
+	justify-content: center ;
 }
 
-.screen {
+.copyrights {
+	color: rgba( 83 , 89 , 98 , 1 );
+	text-align: center ;
+	bottom: 5px ;
+	font-size: 11px ;
+	font-weight: 300 ;
+}
+
+
+/* Transition classes - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.hide {
+	display: none ;
+}
+
+.move_up {
 	transition: all 0.3s ease-out ;
+	transform: translatey( -900px );
+	opacity: 0 ;
+}
+
+.shifted_down {
+	transform: translatey( 900px );
+	height: 0 ;
+	opacity: 0 ;
+}
+
+/* Welcome screen */
+
+.welcome_text {
+	font-size: 14px ;
+	color: #0b97ac ;
+}
+
+.memory_logo {
+	margin-top: 4rem ;
+	width: 51vw ;
+}
+
+.big_letter {
+	transition: all 0.2s ease-out ;
+}
+
+.waved ,
+.big_letter:hover {
+    transform: translatey( 20px );
+}
+
+.difficulties {
+	display: flex ;
+	padding: 0 ;
+	margin: 0 ;
+	justify-content: center ;
+}
+
+.difficulties .difficulty_button {
+	font-family: 'lato' , sans-serif ;
+	font-weight: 700 ;
+	margin: 5px ;
+} 
+
+.difficulty_button,
+.play_again_button {
+	display: inline-flex ;
+	font-weight: 700 ;
+	width: 48px ;
+	height: 48px ;
+	border-radius: 4px ;
+	background: #2c3139 ;
+	align-self: center ;
+	justify-content: center ;
+	align-items: center ;
+	color: #ee4e7a ;
+	transition: all 0.22s ease-out ;
+}
+
+.difficulty_button:hover ,
+.play_again_button:hover {
+	color: #50e3c2 ;
+	background: #262a32 ;
+}
+
+.kid {
+	background-color: #0b97ac ;
+}
+
+.expirienced {
+	background-color: #4f72b7 ;
+}
+
+.unicorn {
+	background-color: #a066aa ;
+}
+
+
+/* Gameboard screen - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.container_game_info {
+	display: flex ;
+	justify-content: space-between ;
+	margin: 5px 10px ;
+}
+
+.game_info {
+	margin: 0 ;
+	color: #4f5c62 ;
+	font-size: 14px ;
+	text-transform: uppercase ;
+}
+
+.reset_game {
+	color: #4f5c62 ;
+}
+
+.reset_game:hover {
+	color: #ee4e7a ;
 }
 
 .game_child_container {
@@ -173,17 +236,25 @@ a {
 	justify-content: center ;
 }
 
+/* memory card states */
+
+.selected ,
+.selected:hover {
+	background: #222222 ;
+}
+
 .card {
 	display: inline-flex ;
 	width: 10vh ;
 	height: 10vh ;																																																				
 	border-radius: 4px ;
-	margin: 1px;
+	margin: 1px ;
 	background: #2c3139 ;
 	align-self: center ;
 	justify-content: center ;
 	align-items: center ;
 	transition: all 0.2s ease-out ;
+	color: #50e3c2 ;
 }
 
 .memory_card_iteration {
@@ -193,112 +264,19 @@ a {
 	background: #262a32 ;
 }
 
-.container_game_info {
-	display: flex ;
-	justify-content: space-between ;
-	margin: 5px 10px ;
-}
-
-.final_result_container {
-	font-size: 14px ;
-	color: #e3d4a6 ;
-	height: 48px ;
-
-}
-
-.game_info {
-	margin: 0 ;
-	color: #4f5c62 ;
-	font-size: 14px ;
-	text-transform: uppercase ;
-}
-.reset_game{
-	color: #4f5c62 ;
-}
-.reset_game:hover {
-	color: #ee4e7a ;
-}
-.matching_cards {
-	box-shadow: inset 0px 0px 0px 1px rgba( 11 , 111 , 111 , 0.9 ) ;
-}
-
-.difficulty_button,
-.play_again {
-	display: inline-flex ;
-	font-weight: 700 ;
-	width: 48px ;
-	height: 48px ;
-	border-radius: 4px ;	
-	background: #2c3139 ;
-	align-self: center ;
-	justify-content: center ;
-	align-items: center ;
-	color: #ee4e7a ;
-	transition: all 0.22s ease-out ;
-}
-
-.play_again {
-	width: 50% ;
-}
-
-.play_again:hover ,
-.difficulty_button:hover {
-	color: #50e3c2 ;
-	background: #262a32 ;
-}
-
-.difficulties {
-	display: flex ;
-	padding: 0 ;
-	margin: 0 ;
-	justify-content: center ;
-}
-
-.difficulties .difficulty_button {
-	margin: 5px ;
-} 
-
-.kid {
-	background-color: #0b97ac ;
-}
-
-.expirienced {
-	background-color: #4f72b7 ;
-}
-
-.unicorn {
-	background-color: #a066aa ;
-}
-
-.memory_logo {
-	margin-top: 4rem ;
-	width: 51vw ;
-}
-
-/* memory card states */
-
-.selected ,
-.selected:hover {
-	background: #222222 ;
-}
-
 .matched_symbols {
 	animation:  bump 0.3s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
   	transform: translate3d( 0,  0 , 0 ) ;
   	color: #2c3139;
 }
-
-.winning_symbols {
-	color: #e3d4a6 ;
-	animation:  winning 0.3s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
-}
-
+	
 .matched_cards {
 	background: #3d4b51;
 }
 
-.hide {
-	display: none ;
+.winning_symbols {
+	color: #e3d4a6 ;
+	animation:  winning 0.3s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
 }
 
 .tip_message {
@@ -308,16 +286,60 @@ a {
 	color: #e3d4a6 ;
 }
 
-/* interactions */
 .nonono {
   animation: shake 0.2s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
   transform: translate3d( 0 , 0 , 0) ;
   backface-visibility: hidden ;
 }
 
+/* :) */
+.matching_cards {
+	box-shadow: inset 0px 0px 0px 1px rgba( 11 , 111 , 111 , 0.1 ) ;
+}
 
 
-/* animations */
+/* Results screen - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.final_result_container {
+	font-size: 14px ;
+	color: #e3d4a6 ;
+	height: 48px ;
+
+}
+
+.container-padded {
+ 	padding-top: 30px ;
+}
+
+.stars_container {
+	width: 144px ;
+	display: flex ;
+	justify-content: space-around ;
+	margin: 0 ;
+	padding: 0 ;
+	color: #2c3139 ;
+	list-style: none ;
+}
+
+.stars-gold {
+	animation: bump 0.3s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
+	color: gold ;
+}
+
+.winner_text {
+	font-size: 22px ;
+	font-weight: 900 ;
+	height: 33px ;
+	color: #e3d4a6 ;
+}
+
+.play_again_button {
+	width: 50% ;
+}
+
+
+/* Animations - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
 @keyframes shake {
   10% , 90% {
     transform: translate3d( -1px , 0 , 0 ) ;
@@ -338,58 +360,54 @@ a {
 
 @keyframes bump {
   10% {
-    transform: scale3d( 1.1 , 1.1 , 0 ) ;
+    transform: scale3d( 1.1 , 1.1 , 1 ) ;
   }
   
   20% {
-    transform: scale3d( 1.6 , 1.6 , 0 ) ;
+    transform: scale3d( 1.6 , 1.6 , 1 ) ;
   }
 
   30% {
-  	transform: scale3d( 1.6 , 1.6 , 0 ) ;
+  	transform: scale3d( 1.6 , 1.6 , 1 ) ;
     color: #e3d4a6 ;
   }
 
   40% , 60% {
-    transform: scale3d( 1.4 , 1.4 , 0 ) ;
+    transform: scale3d( 1.4 , 1.4 , 1 ) ;
   }
 
   50% , 70% {
-  	transform: scale3d( 0.8 , 0.8 , 0 ) ;
+  	transform: scale3d( 0.8 , 0.8 , 1 ) ;
   }
   80% {
-  	transform: scale3d( 1.1 , 1.1 , 0 ) ;
+  	transform: scale3d( 1.1 , 1.1 , 1 ) ;
   }
   90% {
-  	transform: scale3d( 0.9 , 0.9 , 0 ) ;
+  	transform: scale3d( 0.9 , 0.9 , 1 ) ;
   }
 }
 
 @keyframes winning {
   10% , 30% {
-    transform: scale3d( 1.2 , 1.2 , 0 ) ;
+    transform: scale3d( 1.2 , 1.2 , 1 ) ;
     color: #e3d4a6 ;
   }
   
-  20% , {
-    transform: scale3d( 0.8 , 0.8 , 0 ) ;
+  20% {
+    transform: scale3d( 0.8 , 0.8 , 1 ) ;
   }
 
   40% , 60% {
-    transform: scale3d( 1.1 , 1.1 , 0 ) ;
+    transform: scale3d( 1.1 , 1.1 , 1 ) ;
   }
 
   50% , 70% {
-  	transform: scale3d( 0.9 , 0.9 , 0 ) ;
+  	transform: scale3d( 0.9 , 0.9 , 1 ) ;
   }
   80% {
-  	transform: scale3d( 1.1 , 1.1 , 0 ) ;
+  	transform: scale3d( 1.1 , 1.1 , 1 ) ;
   }
   90% {
-  	transform: scale3d( 0.9 , 0.9 , 0 ) ;
+  	transform: scale3d( 0.9 , 0.9 , 1 ) ;
   }
 }
-
-
-
-

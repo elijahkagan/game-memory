@@ -8,7 +8,7 @@
 	*/
 var memoryGame = { 
 	// * Settings
-	difficulty : { 'kid' : [ 16 , 2 ] , 'expirienced' : [ 72 , 2 ] , 'unicorn' : [ 36 , 3 ] } , 
+	difficulty : { 'kid' : [ 16 , 2 ] , 'expirienced' : [ 72 , 2 ] , 'unicorn' : [ 36 , 3 ] }, 
 	hideCardsDelay : 633 ,
 
 	// * Game UI variable containers
@@ -59,7 +59,7 @@ var memoryGame = {
 		memoryGame.craftGameMatrix( symbolsLibrary );
 		memoryGame.setBoardSize();
 		memoryGame.switchGameView( memoryGame.scrA , memoryGame.scrB , 1 );
-	} ,	
+	},	
 
 	/** 
 	* @description: Chooses random, different symbols for the game from the symbols library and appends them to object variable array. 
@@ -90,7 +90,7 @@ var memoryGame = {
 		};
 		});
 		//console.log( memoryGame.gameMatrix );
-	} ,
+	},
 
 	/** 
 	* @description: On the basis of the user choice it ads the proper CSS class to the game cards container. 
@@ -105,7 +105,7 @@ var memoryGame = {
 		} else {
 			targetBoard.addClass( 'medium' );
 		};
-	} ,
+	},
 
 	/** 
 	* @description: Switches views on the basis on parameters
@@ -138,7 +138,7 @@ var memoryGame = {
 			clickedCard.addClass( 'selected' );
 			var clickId = clickedCard.attr( 'id' );
 			var clickSymbolClass = memoryGame.gameMatrix[ clickId ];	
-			var innerSymbol = clickedCard.find('a');
+			var innerSymbol = clickedCard.find( 'a' );
 			innerSymbol.addClass( clickSymbolClass );
 			memoryGame.cardsSelected.push( clickId );
 
@@ -146,29 +146,31 @@ var memoryGame = {
 			
 			memoryGame.checkThePair();
 		} else {
-			var innerSymbol = clickedCard.find('a');
+			var innerSymbol = clickedCard.find( 'a' );
 			innerSymbol.addClass( 'nonono' );
 			memoryGame.updateTip( "This Card is already revealed!" );
 			setTimeout(function() {
 					innerSymbol.removeClass( 'nonono' );
 				}, 200);
 			};
-	} ,
+	},
 
 	/** 
+	*  @Name: Oracle :) 
 	* @description: After users choice, this one will show all the maching cards for the initial one.
 	* @param: it takes the symbol from the clicked card as a base for the search of other, same cards.
+	* To see it in action, please uncomment its code
 	*/
 	showMatchingCards : function( clickSymbolClass ) {
-		var lists = $( '.memory_card_iteration' );
+	/*      var lists = $( '.memory_card_iteration' );
 			lists.each( function() {
 			var thisCardId = $( this ).attr( 'id' );
 			var thisSymbolClass = memoryGame.gameMatrix[ thisCardId ];
 			if ( thisSymbolClass == clickSymbolClass) {
 				$(this).addClass( 'matching_cards' );
 			};
-		});
-	} ,
+		}); */
+	},
 
 	/** 
 	* @description: Checks if the symbols of all the cards that are selected contain the same symbol. The maching process is performed for each element of an array that contains certain ammout of selected card ID, if anytime the symbol is not matching the symbol of the first selected card - the array is being emptied and implications are being processed.  
@@ -207,7 +209,7 @@ var memoryGame = {
 		} else {
 		  //console.log( "Wow, welcome card, you'r the first one!" );
 		};
-	} ,
+	},
 
 	/** 
 	* @description: 
@@ -221,7 +223,7 @@ var memoryGame = {
 			var thisCard = $( "#" + content );
 			thisCard.removeClass('selected');
 			var thisInnerSymbolClass = memoryGame.gameMatrix[ content ];
-			var innerSymbol = thisCard.find('a');
+			var innerSymbol = thisCard.find( 'a' );
 			innerSymbol.addClass( 'nonono' );
 			memoryGame.updateTip( "This are not a matching cards!" );
 			//innerSymbol.fadeOut( 300 ); TODO - protection agains fast clicking
@@ -232,7 +234,7 @@ var memoryGame = {
 				}, memoryGame.hideCardsDelay );
 		});
 		memoryGame.cardsSelected = [] ;
-	} ,
+	},
 	
 	/** 
 	* @description: 
@@ -260,7 +262,7 @@ var memoryGame = {
 		//console.log( memoryGame.cardsSelected );
 		memoryGame.checkIfGameWon();
 
-	} ,
+	},
 
 	/** 
 	* @description: 
@@ -301,7 +303,7 @@ var memoryGame = {
 		setTimeout( function() {
 			memoryGame.tipContainer.fadeOut( 800 );
    			}, 999 );
-		} ,
+	},
 
 	/** 
 	* @description: Updates the game state variable and user interface with new values for moves,
@@ -311,7 +313,7 @@ var memoryGame = {
 		memoryGame.movesContainer.empty();
 		memoryGame.movesContainer.text( 'Moves: ' + memoryGame.moves );
 		//console.log("Moves updated to" + memoryGame.moves );
-		} ,
+	},
 
 	/** 
 	* @description: Updates the game state variable and user interface with new values for points. I t also trigers a step for updating the game moves.
@@ -325,7 +327,7 @@ var memoryGame = {
 		memoryGame.pointsContainer.text( "Points: " + memoryGame.points );	
 		//console.log("Points updated to" + memoryGame.points );
 		memoryGame.updateMoves();
-		} ,
+	},
 
 	/** 
 	* @description: Because there are backgrounds only in informative parts of the game - this switches the background on or off.
@@ -383,10 +385,10 @@ var memoryGame = {
 			// Changes class for each star as long as proper amount of stars is lit.
 			if ( i < starIndex) {
 				var innerSymbol = $( this );//.find('li');
-					innerSymbol.removeClass( 'stars--gold' );	
+					innerSymbol.removeClass( 'stars-gold' );	
 					setTimeout( function() {
 						// Sets a brak before user sees the animations.
-						innerSymbol.addClass( 'stars--gold' );
+						innerSymbol.addClass( 'stars-gold' );
     				}, i * 633); 
 				};
 			});
@@ -416,6 +418,6 @@ var memoryGame = {
 		memoryGame.movesContainer.text( "Moves: " + memoryGame.moves );
 		memoryGame.gameBoardElement.empty();
 		var targetBoard = $( '.game_child_container' ).attr( 'class' , 'game_child_container' );
-		} ,
+	},
 
 };
