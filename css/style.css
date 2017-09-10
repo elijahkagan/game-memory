@@ -1,154 +1,234 @@
 /* Containers */
 #game {
-	display: flex;
-	width: 100vw;
-	height: 100vh;
-	margin: 0;
-	padding: 0;
-	flex-grow: 1;
-	flex-shrink: 1;
-	font-family: 'Lato', sans-serif;
-	background: #2B3139;
+	display: flex ;
+	width: 100% ;
+	height: 100vh ;
+	margin: 0 ;
+	padding: 0 ;
+	flex-grow: 1 ;
+	flex-shrink: 1 ;
+	font-family: 'Lato', sans-serif ;
+	background: #2B3139 ;
 }
 
 li {
-
+	font-family: 'FontAwesome' ;
+	font-size: 16px ;
+}
+a { 
+	font-size: 33px ;
+	color: #50e3c2 ;
 }
 
 .game_parent_container {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	flex-grow: 0;
-	flex-shrink: 0;
-	justify-content: center;
-	align-items: center;
+	display: flex ;
+	width: 100% ;
+	height: 100% ;
+	flex-grow: 0 ;
+	flex-shrink: 0 ;
+	justify-content: center ;
+	align-items: center ;
 }
 
 .container_centered {
-	display: flex;
-	flex-direction: column;
-	width: 50%;
-	height: 50%;
-	flex-grow: 0;
-	flex-shrink: 0;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	background: #3D4B51;
-	text-align: center;
-	color: #50E3C2;
+	display: flex ;
+	flex-direction: column ;
+	width: 50% ;
+	height: 50% ;
+	flex-grow: 0 ;
+	flex-shrink: 0 ;
+	justify-content: center ;
+	align-items: center ;
+	align-content: center ;
+	background: #3D4B51 ;
+	text-align: center ;
+	color: #50E3C2 ;
 
 }
 
 .game_child_container {
-	display: flex;
-	width: 242px;
-	height: 242px;
-	padding: 24px;
-	flex-grow: 0;
-	background: #3D4B51;
-	align-self: center;
-	box-shadow: 0 4px 4px 4px #282B30;
-	border-radius: 4px;
+	display: flex ;
+	padding: 24px ;
+	background: #3D4B51 ;
+	align-self: center ;
+	box-shadow: 0 4px 4px 4px #282B30 ;
+	border-radius: 2px ;
+}
+.small {
+	max-width: 40.5vh;
+}
+.medium {
+	max-width: 61vh;
+}
+
+.large {
+	max-width: 92vh;
 }
 
 .memory_cards_container {
-	display: flex;
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	flex-wrap: wrap;
-	background: #3D4B51;
-	border-radius: 4px;	
-	justify-content: space-around;
+	display: flex ;
+	width: 100% ;
+	height: 100% ;
+	padding: 0 ;
+	margin: 0 ;
+	flex-wrap: wrap ;
+	background: #3D4B51 ;
+	border-radius: 4px ;
+	justify-content: center ;
+	/* align-items: center ; */
+	/* align-content: center ; */
+}
+
+.card {
+	display: inline-flex ;
+	width: 10vh ;
+	height: 10vh ;																																																				
+	border-radius: 4px ;
+	margin: 0.03em ;
+	background: #2c3139 ;
+	align-self: center ;
+	justify-content: center ;
+	align-items: center ;
+	transition: all 0.2s ease-out ;
+
 }
 
 .memory_card_iteration {
-	display: inline-flex;
-	width: 22%;
-	height: 22%;
-	border-radius: 4px;	
-	background: #2C3139;
-	align-self: center;
-	justify-content: center;
-	align-items: center;
-	transition: all 0.22s ease-out;
 }
 
 .memory_card_iteration:hover {
-	/*border: 1px solid #50E3C2;*/
-	background: #262A32;
+	background: #262a32 ;
+}
+
+.container_game_info {
+	display: flex ;
+	justify-content: space-between ;
+	margin: 0.5em 2em ;
+}
+.game_info {
+	margin: 0 ;
+	color: #4f5c62 ;
+	font-size: 0.8rem ;
+	text-transform: uppercase ;
+}
+
+.matching_cards {
+	box-shadow: inset 0px 0px 0px 2px rgba( 0, 0, 0, 0.2);
 }
 
 .difficulty_button,
 .play_again {
-	display: inline-flex;
-	width: 48px;
-	height: 48px;
-	border-radius: 4px;	
-	background: #2C3139;
-	align-self: center;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid #2C3139;
-	color: #3D4B51;
-	transition: all 0.22s ease-out;
+	display: inline-flex ;
+	width: 48px ;
+	height: 48px ;
+	border-radius: 4px ;	
+	background: #2C3139 ;
+	align-self: center ;
+	justify-content: center ;
+	align-items: center ;
+	border: 1px solid #2C3139 ;
+	color: #3D4B51 ;
+	transition: all 0.22s ease-out ;
 }
 .play_again {
-	width: 50%;
+	width: 50% ;
 }
 
 
 .play_again:hover,
 .difficulty_button:hover {
-	/*border: 1px solid #50E3C2;*/
-	color: #50E3C2;
-	background: #262A32;
+	/*border: 1px solid #50E3C2 ;*/
+	color: #50E3C2 ;
+	background: #262A32 ;
 }
 
 .difficulties {
-	display: flex;
-	padding: 0;
-	margin: 0;
-	justify-content: center;
+	display: flex ;
+	padding: 0 ;
+	margin: 0 ;
+	justify-content: center ;
 }
 
 .difficulties .difficulty_button {
-	margin: 5px;
+	margin: 5px ;
 } 
 
 /* Memory Card States */
 
 .selected,
 .selected:hover {
-	/*transition: background 0.1s ease-out;*/
-	/*animation: clickme 0.2s 1 ;*/
-	background: #9012FE;
+	background: #222222 ;
 }
 
+.matched_symbols {
+	animation:  bump 0.2s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
+  	transform: translate3d(0, 0, 0) ;
+  	color: #2C3139;
+}
+.matched_cards {
+	background: #3D4B51;
+}
 
 .hide {
-	display: none;
+	display: none ;
 }
-/*@keyframes clickme {
-    0% {
-        background: : #50E3C2;
-    }
-   100% {
-        background: #9012FE;
-    }
-    70% {
-        opacity: .9;
-        border-color: #8CC396;
-    }
-    80%{
-        opacity: .4;
-    }
-    100% {
-        transform: rotate(-45deg) translate(-90px, 90px) scale(4);
-        opacity: 0;
-        border-color: #fff;
-    }
-}*/
+
+.tip_message {
+	position: absolute ;
+	margin-left: 2em ;
+	font-weight: 400 ;
+	color: #e3d4a6 ;
+}
+
+/* Interactions */
+.nonono {
+  animation: shake 0.2s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
+  transform: translate3d( 0 , 0 , 0) ;
+  backface-visibility: hidden ;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0) ;
+  }
+  
+  20%, 80% {
+    transform: translate3d(3px, 0, 0) ;
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-6px, 0, 0) ;
+  }
+
+  40%, 60% {
+    transform: translate3d(6px, 0, 0) ;
+  }
+}
+@keyframes bump {
+  10%, 30% {
+    transform: scale3d(1.6, 1.6, 0) ;
+    color: #e3d4a6 ;
+  }
+  
+  20%, {
+    transform: scale3d(0.9, 0.9, 0) ;
+  }
+
+  40%, 60% {
+    transform: scale3d(1.4, 1.4, 0) ;
+  }
+
+  50%, 70% {
+  	transform: scale3d(0.8, 0.8, 0) ;
+  }
+  80% {
+  	transform: scale3d(1.1, 1.1, 0) ;
+  }
+  90% {
+  	transform: scale3d(0.9, 0.9, 0) ;
+  }
+
+
+}
+
+
