@@ -36,6 +36,7 @@ var memoryGame = {
 	moves : 0 ,
 	time : 'Time: 0:00:00' ,
 	tickTackCount : 0 ,
+	timerInterval : 0 ,
 	finalResult : '' ,
 
 
@@ -267,7 +268,7 @@ var memoryGame = {
 			thisCard.removeClass( 'memory_card_iteration' );
 			thisCard.removeClass( 'selected' );
 			});
-
+		// Emty the array with selected cards IDs.
 		memoryGame.cardsSelected = [] ;
 		// console.log( memoryGame.cardsSelected );
 		memoryGame.checkIfGameWon();
@@ -331,7 +332,7 @@ var memoryGame = {
 	* @description: Starts a repetitive task that performs each 1sec (1000ms). 
     */
 	startTimer : function() {
-		setInterval( memoryGame.timer , 1000 );
+		memoryGame.timerInterval = setInterval( memoryGame.timer, 1000 );
 
 	},
 
@@ -339,7 +340,7 @@ var memoryGame = {
 	* @description: Stops a repetitive task done by timer method. 
     */
 	stopTimer : function() {
-		clearInterval( memoryGame.startTimer );
+		clearInterval( memoryGame.timerInterval );
 	},
 
 	/** 
@@ -348,9 +349,7 @@ var memoryGame = {
       By using this function in an interval of 1000ms player experience an indication of the flow of time. 
       */
 	timer : function() {
-		console.log(memoryGame.tickTackCount);
 		memoryGame.tickTackCount += 1 ;
-		console.log(memoryGame.tickTackCount);
 		var ticks = parseInt( memoryGame.tickTackCount , 10 );
 		var hours   = Math.floor( ticks / 3600 );
 		var minutes = Math.floor( ( ticks - ( hours * 3600 )) / 60 );
@@ -461,8 +460,8 @@ var memoryGame = {
 		memoryGame.moves = 0 ;
 		memoryGame.tickTackCount = 0 ;
 		memoryGame.time = 'Time: 00:00:00' ;
-		// Stop the timers
-		memoryGame.stopTimer();
+		// Stop the timer
+		memoryGame.stopTimer(); 
 		// Empty containers
 		memoryGame.updateTip( '' );
 		memoryGame.timerContainer.empty();

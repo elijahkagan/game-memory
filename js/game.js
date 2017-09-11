@@ -22,17 +22,6 @@ $( document ).ready( function() {
 			});
   	}
 
-
-	/** 
-	* @description: Function stops the time flow for the interval based animation.
-	* @constructor: 
-	* @param: Interval object. 
-	*/
-	function abortTimer() { 
-  		clearInterval( wave );
-	}
-
-
 	/** 
 	* @name: Difficulty choice.
     * @description: Action handler for the buttons that set up different game modes called: difficulties. Starts processing of game elements. Starts game timer. Stops animation of the logo. 
@@ -43,11 +32,9 @@ $( document ).ready( function() {
 		//console.log( "Difficulty level set to: " + dataDiff + "!" );
 		difficultyChoice =  memoryGame.difficulty[ dataDiff ];
 		memoryGame.gameBoard( difficultyChoice );
-		console.log(memoryGame.startTimer);
 		memoryGame.startTimer();
 		clearInterval( wave );
 	});
-	
 
 	/** 
 	* @name: Pick a card - the centre of the experience. 
@@ -59,7 +46,6 @@ $( document ).ready( function() {
 				memoryGame.selectTheCard( clickedCard );
 	});
 
-
 	/** 
 	* @description: Resets the game and brings the user to the Welcome screen. Starts wave animation Interval 
     * @param: User choice.
@@ -67,11 +53,9 @@ $( document ).ready( function() {
 	$('.reset_game').click(function() {
 		memoryGame.switchGameView( memoryGame.scrB , memoryGame.scrA , 1 );
 		setTimeout( memoryGame.resetData(), 40 );
-		clearInterval( memoryGame.timer );
 		wave = setInterval( waveTheMemory , 6000 );
 
 	});
-
 
 	/** 
 	* @description: Allows the player to start the game again by resetting the display to the Welcome screen. Starts the wave animation Interval 
