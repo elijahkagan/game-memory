@@ -194,7 +194,10 @@ a {
 	font-size: 14px ;
 	text-transform: uppercase ;
 }
-
+.container_game_info p {
+	width: 33%;
+	text-align: center;
+}
 .reset_game {
 	color: #4f5c62 ;
 }
@@ -294,7 +297,7 @@ a {
 
 /* :) */
 .matching_cards {
-	box-shadow: inset 0px 0px 0px 1px rgba( 11 , 111 , 111 , 0.1 ) ;
+	box-shadow: inset 0px 0px 0px 1px rgba( 11 , 111 , 111 , 0.9) ;
 }
 
 
