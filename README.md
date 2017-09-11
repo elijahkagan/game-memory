@@ -24,6 +24,7 @@
 ```javascript
 var memoryGame = function() {
     console.log(Starting The Memory Game);
-};```
+};
+```
 5. Adding the repository to Github.
 6. Version 1.0.
