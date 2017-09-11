@@ -35,7 +35,7 @@ $( document ).ready( function() {
 
 	/** 
 	* @name: Difficulty choice.
-    * @description: Action handler for the buttons that set up different game modes called: difficulties. Starts processing of game elements. Stops animation of the logo. 
+    * @description: Action handler for the buttons that set up different game modes called: difficulties. Starts processing of game elements. Starts game timer. Stops animation of the logo. 
     * @param: User choice.
 	*/
 	$('.difficulty_button').click(function() {
@@ -43,6 +43,8 @@ $( document ).ready( function() {
 		//console.log( "Difficulty level set to: " + dataDiff + "!" );
 		difficultyChoice =  memoryGame.difficulty[ dataDiff ];
 		memoryGame.gameBoard( difficultyChoice );
+		console.log(memoryGame.startTimer);
+		memoryGame.startTimer();
 		clearInterval( wave );
 	});
 	
@@ -65,7 +67,9 @@ $( document ).ready( function() {
 	$('.reset_game').click(function() {
 		memoryGame.switchGameView( memoryGame.scrB , memoryGame.scrA , 1 );
 		setTimeout( memoryGame.resetData(), 40 );
+		clearInterval( memoryGame.timer );
 		wave = setInterval( waveTheMemory , 6000 );
+
 	});
 
 
@@ -75,7 +79,7 @@ $( document ).ready( function() {
     */
 	$('.play_again_button').click(function() {
 		memoryGame.resetData();
-		memoryGame.switchGameView( memoryGame.scrC , memoryGame.scrA , 1 );
+		memoryGame.switchGameView( memoryGame.scrC , memoryGame.scrA , 0 );
 		wave = setInterval( waveTheMemory , 6000 );
 	});
 });

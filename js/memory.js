@@ -17,7 +17,7 @@ var memoryGame = {
 	scrC : $( '#screen_results' ),
 	gameBoardElement : $( '#game_board' ),
 	movesContainer : $( '#moves' ),
-	pointsContainer : $( '#points' ),
+	timerContainer : $( '#timer' ),
 	tipContainer : $( '#tip' ),
 	finalResultContainer : $( '.final_result_container' ),
 
@@ -34,7 +34,8 @@ var memoryGame = {
 	// * Game state and results elements
 	tipMessage : '' , 
 	moves : 0 ,
-	points : 0 ,
+	time : 'Time: 0:00:00' ,
+	tickTackCount : 0 ,
 	finalResult : '' ,
 
 
@@ -69,7 +70,7 @@ var memoryGame = {
 	craftGameMatrix : function(symbolsLibrary) {
 		var symbolStepCount = memoryGame.gameCardsIteration / memoryGame.cardsPairLength 
 		while ( symbolStepCount > 0 ) { 
-			// Fulfils the array of symbols with randomly chosen symbols from symbolsLibrary
+			// Fulfils the array of symbols with randomly chosen symbols from symbolsLibrary.
 			var rndSymindex = Math.floor( Math.random() * symbolsLibrary.length );
 			var symbol = symbolsLibrary.splice( rndSymindex , 1 )[ 0 ];
 			memoryGame.symbolsForTheGame.unshift( symbol );
@@ -153,7 +154,7 @@ var memoryGame = {
 			// Let user know that the card is already selected
 			var innerSymbol = clickedCard.find( 'a' );
 			innerSymbol.addClass( 'nonono' );
-			memoryGame.updateTip( "You already selected this card!" );
+			memoryGame.updateTip( "Already selected!" );
 			setTimeout(function() {
 					innerSymbol.removeClass( 'nonono' );
 				}, 200);
@@ -232,7 +233,7 @@ var memoryGame = {
 			var thisInnerSymbolClass = memoryGame.gameMatrix[ content ];
 			var innerSymbol = thisCard.find( 'a' );
 			innerSymbol.addClass( 'nonono' );
-			memoryGame.updateTip( "This are not a matching cards!" );
+			memoryGame.updateTip( "The cards are different!" );
 			// innerSymbol.fadeOut( 300 ); TODO - protection agains fast clicking
 			setTimeout(function() {
 				// Delay the removal of the classes so the animation could perform nicely. 
@@ -245,18 +246,19 @@ var memoryGame = {
 	},
 	
 	/** 
-	* @description: 
-	* @param: 
-	*/
+	* @description: Updates UI with information. Changes states for matched cards and inner symbols. Updates game statistics 
+      and decreases the number of matching pair events needed to win the game. Resets selected cards array and starts checking if the game winning goal has been reached.
+    * @param: Processing both engine variables and UI elements.
+    */
 	thePairMatched : function() {
 		// console.log( "The Pair Matched" );
-		memoryGame.updateTip( "Awesome, you found it!" );
-		memoryGame.updateStats( 1 );
+		memoryGame.updateTip( "You found it!" );
+		memoryGame.updateStats();
 		memoryGame.pairsRevealed += 1;
 		// console.log( "memoryGame.pairsRevealed " + memoryGame.pairsRevealed );
 		memoryGame.cardsSelected.forEach( function( content ){
 			// console.log("removing selected class from" + content ); 
-			var thisCard = $( "#" + content );
+			var thisCard = $( '#' + content );
 			var thisInnerSymbolClass = memoryGame.gameMatrix[ content ];
 			var innerSymbol = thisCard.find('a');
 			innerSymbol.addClass( 'matched_symbols' );
@@ -273,9 +275,10 @@ var memoryGame = {
 	},
 
 	/** 
-	* @description: 
-	* @param: 
-	*/
+	* @description: Check if the amount of matched pairs is smaller than the maximum number of the matched pairs in this game.
+      Initialise the winning sequence also generating data for the winning screen.
+    * @param: it matches the actual amount of revealed cards with the maximum possible number of matched pairs in that particular game.
+    */
 	checkIfGameWon : function() {
 		// console.log( memoryGame.pairsRevealed );
 		if ( memoryGame.pairsRevealed < memoryGame.gameCardsIteration/memoryGame.cardsPairLength ){
@@ -293,8 +296,9 @@ var memoryGame = {
 			});
 
 			setTimeout( function() {
+				clearInterval()
 				memoryGame.gameBoardElement.removeClass( 'matched_symbols' );
-				memoryGame.switchGameView( memoryGame.scrB , memoryGame.scrC , 0 );
+				memoryGame.switchGameView( memoryGame.scrB , memoryGame.scrC , 1 );
    			}, 999 );
 		};
 	},
@@ -304,7 +308,6 @@ var memoryGame = {
 	* @param: Message to pass to DOM element
 	*/
 	updateTip : function( message ) {
-		// var tip = $( '#tip' );
 		memoryGame.tipContainer.show();
 		memoryGame.tipContainer.empty();
 		memoryGame.tipContainer.text( message );
@@ -314,7 +317,9 @@ var memoryGame = {
 	},
 
 	/** 
-	* @description: Function updates the game state variable and user interface with a new values for moves. */
+	* @description: Function updates the game state variable and 
+	  user interface with a new values for moves.
+	*/
 	updateMoves : function() {
 		memoryGame.moves += 1 ;
 		memoryGame.movesContainer.empty();
@@ -323,15 +328,56 @@ var memoryGame = {
 	},
 
 	/** 
-    * @description: Updates the game state variable and user interface with new values for points. I t also triggers a step for updating the game moves.
-    * @param: As point can go up and down, there is a vector input to add 1 or -1 to the points value.
-    * TODO: Initially there was some idea for points, as for now, they are not necessary at all.
+	* @description: Starts a repetitive task that performs each 1sec (1000ms). 
     */
-	updateStats : function( vector ) {		
-		memoryGame.points += vector ;
-		var pointsContainer = $( '#points' );
-		memoryGame.pointsContainer.empty();
-		memoryGame.pointsContainer.text( "Points: " + memoryGame.points );	
+	startTimer : function() {
+		setInterval( memoryGame.timer , 1000 );
+
+	},
+
+ 	/** 
+	* @description: Stops a repetitive task done by timer method. 
+    */
+	stopTimer : function() {
+		clearInterval( memoryGame.startTimer );
+	},
+
+	/** 
+	* @description: Pretends to be a timer. It adds to the Index that is also an input parameter. 
+      On the basis of the value of that information, it constructs a string and puts it into HTML placeholder.
+      By using this function in an interval of 1000ms player experience an indication of the flow of time. 
+      */
+	timer : function() {
+		console.log(memoryGame.tickTackCount);
+		memoryGame.tickTackCount += 1 ;
+		console.log(memoryGame.tickTackCount);
+		var ticks = parseInt( memoryGame.tickTackCount , 10 );
+		var hours   = Math.floor( ticks / 3600 );
+		var minutes = Math.floor( ( ticks - ( hours * 3600 )) / 60 );
+		var seconds = ticks - ( hours * 3600 ) - ( minutes * 60 );
+
+		if (hours < 10) {
+			hours = '0' + hours;
+		}
+		if ( minutes < 10 ) {
+			 minutes = '0' + minutes;
+		}
+		if ( seconds < 10 ) {
+			 seconds = '0' + seconds;
+		}
+		memoryGame.time  = 'Time: ' + hours + ':' + minutes + ':' + seconds ;
+		memoryGame.timerContainer.empty();
+		memoryGame.timerContainer.text( memoryGame.time );
+	},
+
+	/** 
+    * @description: Updates the game state variable and user interface with new values for stars. It also triggers a step for updating the game moves.
+    * @param: As amount of stars can go down, there is a vector input to add -1 trigger to hide/delete one star.
+    * TODO: changing points to time and removing the visibility of stars while game is played so the user is not 
+      discouraged to play. The stars are at the end of the game.
+    */
+	updateStats : function(vector) {
+		//console.log( 'Updating Starts');
 		// console.log("Points updated to" + memoryGame.points );
 		memoryGame.updateMoves();
 	},
@@ -357,11 +403,8 @@ var memoryGame = {
     * TODO: Fine tune the timings for the different game difficulties.
     */
 	updateFinalResults : function () {
-		if ( memoryGame.points == 1 || memoryGame.points == -1 ) {
-				memoryGame.finalResult =  "You collected " + memoryGame.points + " point in " + memoryGame.moves + " moves!" ;
-			} else {
-				memoryGame.finalResult = "You collected " + memoryGame.points + " points in " + memoryGame.moves + " moves!" ;
-			};
+		memoryGame.finalResult =  'You spent ' + memoryGame.time.substring( 5, ) + ' making ' + memoryGame.moves + ' moves to win this game!' ;
+		clearInterval( memoryGame.timer );
 		memoryGame.finalResultContainer.empty();
 		memoryGame.finalResultContainer.text( memoryGame.finalResult );
 		memoryGame.litTheStars();
@@ -374,7 +417,7 @@ var memoryGame = {
     */
 	litTheStars : function() {
 		var starIndex = 0 ;
-		var resultQuality = Math.round(( memoryGame.gameCardsIteration + memoryGame.points)/( memoryGame.moves ) * 100) / 100;
+		var resultQuality = Math.round(( memoryGame.gameCardsIteration)/( memoryGame.moves ) * 100) / 100;
 			if( resultQuality > 0.75 ) {
 				starIndex = 5 ;
 			} else if ( resultQuality > 0.5 ) {
@@ -403,10 +446,10 @@ var memoryGame = {
 
 
 	/** 
-	* @description: Resets the initial values of memoryGame variables and cleans HTML containers.
+	* @description: Resets the initial values of memoryGame variables and cleans HTML containers. 
 	*/
 	resetData : function() {
-		// memoryGame variables
+		// Reset variables
 		memoryGame.pickedCard = '' ;
 		memoryGame.symbolsForTheGame = [] ;
 		memoryGame.gameMatrix = {} ;
@@ -416,11 +459,14 @@ var memoryGame = {
 		memoryGame.cardsSelected = [] ; 
 		memoryGame.pairsRevealed = 0 ;
 		memoryGame.moves = 0 ;
-		memoryGame.points = 0 ;
-		// emptying containers
+		memoryGame.tickTackCount = 0 ;
+		memoryGame.time = 'Time: 00:00:00' ;
+		// Stop the timers
+		memoryGame.stopTimer();
+		// Empty containers
 		memoryGame.updateTip( '' );
-		memoryGame.pointsContainer.empty();
-		memoryGame.pointsContainer.text( "Points: " + memoryGame.points );
+		memoryGame.timerContainer.empty();
+		memoryGame.timerContainer.text( memoryGame.time );
 		memoryGame.movesContainer.empty();
 		memoryGame.movesContainer.text( "Moves: " + memoryGame.moves );
 		memoryGame.gameBoardElement.empty();
