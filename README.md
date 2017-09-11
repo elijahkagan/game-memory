@@ -14,7 +14,8 @@
 5. Symbols hid from the front end and randomly assigned to cards so the game can't be cheated easily.
 6. Tooltip with feedback / instead of stars during the gameplay.
 7. Stars counted at the end of the game.
-6. Design and animations.
+8. Design and animations.
+9. Special method for revealing the matching cards.
 
 ## The process:
 1. Design the UI and UX. 
