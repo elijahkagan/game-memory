@@ -79,7 +79,6 @@ var memoryGame = {
 			memoryGame.symbolsForTheGame.unshift( symbol );
 			symbolStepCount -= 1 ;
 		};
-		// console.log( memoryGame.symbolsForTheGame );
 		memoryGame.symbolsForTheGame.forEach( function ( symbolIndex ) { 
 		// Loop to assign n times (by the cardPairLength ) the symbol in an array of CardID.
 		var localCardsPairLength = memoryGame.cardsPairLength ;
@@ -355,6 +354,7 @@ var memoryGame = {
 		if ( seconds < 10 ) {
 			 seconds = '0' + seconds;
 		}
+		
 		memoryGame.time  = 'Time: ' + hours + ':' + minutes + ':' + seconds ;
 		memoryGame.timerContainer.empty();
 		memoryGame.timerContainer.text( memoryGame.time );
@@ -407,14 +407,10 @@ var memoryGame = {
     	var starsIndex = 0 ;
 		var resultQuality = memoryGame.gameCardsIteration / memoryGame.moves;
 			if( resultQuality > 1 ) {
-				starsIndex = 5 ;
-			} else if ( resultQuality > 0.7 ) {
-				starsIndex = 4 ;
-			} else if ( resultQuality > 0.6 ) {
 				starsIndex = 3 ;
-			} else if ( resultQuality > 0.3 ) {
+			} else if ( resultQuality > 0.7 ) {
 				starsIndex = 2 ;
-			} else if ( resultQuality > 0.1 ) {
+			} else if ( resultQuality > 0.3 ) {
 				starsIndex = 1 ;
 			} else {
 				starsIndex = 0;
