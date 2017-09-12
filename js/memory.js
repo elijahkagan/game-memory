@@ -25,7 +25,7 @@ var memoryGame = {
 	pickedCard : '' ,
 	cardsIdLibrary : [] ,
 	symbolsForTheGame : [] ,
-	gameMatrix : {} , // My favourite! :)
+	gameMatrix : {} ,
 	gameCardsIteration : 0 ,
 	cardsPairLength : 0 ,
 	cardsSelected : [] ,
@@ -61,6 +61,8 @@ var memoryGame = {
 		memoryGame.craftGameMatrix( symbolsLibrary );
 		memoryGame.setBoardSize();
 		memoryGame.switchGameView( memoryGame.scrA , memoryGame.scrB , 1 );
+		console.log("initial shine");
+		memoryGame.litTheStars( memoryGame.starsCount() , '.stars_small' , 'shine' , 10 );
 	},	
 
 	/** 
@@ -93,7 +95,6 @@ var memoryGame = {
 			localCardsPairLength -= 1 ;
 		};
 		});
-		//console.log( memoryGame.gameMatrix );
 	},
 
 	/** 
@@ -169,7 +170,6 @@ var memoryGame = {
     * To see it in action, please uncomment its code
     */
 	showMatchingCards : function( clickSymbolClass ) {
-	      //TODO: Comment it out before releasing.
 	      var lists = $( '.memory_card_iteration' );
 			lists.each( function() {
 			var thisCardId = $( this ).attr( 'id' );
@@ -216,7 +216,7 @@ var memoryGame = {
 				memoryGame.updateTip( "Almost there! Keep on picking!" );
 				};
 		} else {
-		  // console.log( "Wow, welcome card, you'r the first one!" );
+		  // "Wow, welcome card, you'r the first one!"
 		};
 	},
 
@@ -226,9 +226,7 @@ var memoryGame = {
 	*/
 	pairingFailed : function() {
 		memoryGame.updateStats( -1 );
-		// console.log("the pair failed in:" + memoryGame.cardsSelected );
 		memoryGame.cardsSelected.forEach( function( content ){
-			// console.log("removing selected class from" + content ); 
 			var thisCard = $( "#" + content );
 			thisCard.removeClass('selected');
 			var thisInnerSymbolClass = memoryGame.gameMatrix[ content ];
@@ -252,25 +250,21 @@ var memoryGame = {
     * @param: Processing both engine variables and UI elements.
     */
 	thePairMatched : function() {
-		// console.log( "The Pair Matched" );
 		memoryGame.updateTip( "You found it!" );
 		memoryGame.updateStats();
 		memoryGame.pairsRevealed += 1;
-		// console.log( "memoryGame.pairsRevealed " + memoryGame.pairsRevealed );
 		memoryGame.cardsSelected.forEach( function( content ){
-			// console.log("removing selected class from" + content ); 
 			var thisCard = $( '#' + content );
 			var thisInnerSymbolClass = memoryGame.gameMatrix[ content ];
 			var innerSymbol = thisCard.find('a');
 			innerSymbol.addClass( 'matched_symbols' );
 			thisCard.addClass( 'matched_cards' );
-			thisCard.removeClass( 'matching_cards' ); //comment it out
+			thisCard.removeClass( 'matching_cards' );
 			thisCard.removeClass( 'memory_card_iteration' );
 			thisCard.removeClass( 'selected' );
 			});
-		// Emty the array with selected cards IDs.
+
 		memoryGame.cardsSelected = [] ;
-		// console.log( memoryGame.cardsSelected );
 		memoryGame.checkIfGameWon();
 
 	},
@@ -281,11 +275,9 @@ var memoryGame = {
     * @param: it matches the actual amount of revealed cards with the maximum possible number of matched pairs in that particular game.
     */
 	checkIfGameWon : function() {
-		// console.log( memoryGame.pairsRevealed );
 		if ( memoryGame.pairsRevealed < memoryGame.gameCardsIteration/memoryGame.cardsPairLength ){
-			//console.log( " continue searching " );
 		} else {
-			// memoryGame.updateTip( );
+
 			memoryGame.updateFinalResults();
 
 			$( '.matched_cards' ).each( function( index ) {
@@ -325,7 +317,6 @@ var memoryGame = {
 		memoryGame.moves += 1 ;
 		memoryGame.movesContainer.empty();
 		memoryGame.movesContainer.text( 'Moves: ' + memoryGame.moves );
-		// console.log("Moves updated to" + memoryGame.moves );
 	},
 
 	/** 
@@ -372,18 +363,16 @@ var memoryGame = {
 	/** 
     * @description: Updates the game state variable and user interface with new values for stars. It also triggers a step for updating the game moves.
     * @param: As amount of stars can go down, there is a vector input to add -1 trigger to hide/delete one star.
-    * TODO: changing points to time and removing the visibility of stars while game is played so the user is not 
-      discouraged to play. The stars are at the end of the game.
     */
-	updateStats : function(vector) {
-		//console.log( 'Updating Starts');
-		// console.log("Points updated to" + memoryGame.points );
+	updateStats : function() {
+		console.log( 'Updating stats' );
+		memoryGame.litTheStars( memoryGame.starsCount() , '.stars_small' , 'shine' , 1 );
 		memoryGame.updateMoves();
 	},
 
 	/** 
 	* @description: Because there are backgrounds only in informative parts of the game - this switches the background on or off.
-	* TODO: Add nicer animation on revealing. Check the Chrome problems.
+	* TODO: Add nicer animation on revealing.
 	*/
 	toggleGameBackgrounds : function() {
 		var gameBody = $( '.game' );
@@ -406,39 +395,46 @@ var memoryGame = {
 		clearInterval( memoryGame.timer );
 		memoryGame.finalResultContainer.empty();
 		memoryGame.finalResultContainer.text( memoryGame.finalResult );
-		memoryGame.litTheStars();
+		memoryGame.litTheStars( memoryGame.starsCount() , '.stars' , 'stars-gold' , 633 );
 	},
 	
 	/** 
-	@description: Sets the proper amount of stars displayed as a gold star at the game results screen.
-    * @param: Takes the amount of cards (dependent on the difficulty) of the game and the final states of memoryGame results variables. 
-    * TODO: Quality of the result measuring needs equalisation based on the user's results. Will require the creation of Game results board to keep game results records.
+	* @description: Sets the proper amount of stars to be displayed according to actual game state.
+    * @param: Takes the amount of cards (dependent on the difficulty) of the game and the state of the memoryGame.moves variable. 
+    * @return: Returns an integer - the amount that corresponds to the game result.
     */
-	litTheStars : function() {
-		var starIndex = 0 ;
-		var resultQuality = Math.round(( memoryGame.gameCardsIteration)/( memoryGame.moves ) * 100) / 100;
-			if( resultQuality > 0.75 ) {
-				starIndex = 5 ;
-			} else if ( resultQuality > 0.5 ) {
-				starIndex = 4 ;
+    starsCount : function() {
+    	var starsIndex = 0 ;
+		var resultQuality = memoryGame.gameCardsIteration / memoryGame.moves;
+			if( resultQuality > 1 ) {
+				starsIndex = 5 ;
+			} else if ( resultQuality > 0.7 ) {
+				starsIndex = 4 ;
+			} else if ( resultQuality > 0.6 ) {
+				starsIndex = 3 ;
 			} else if ( resultQuality > 0.3 ) {
-				starIndex = 3 ;
-			} else if ( resultQuality > 0.2 ) {
-				starIndex = 2 ;
+				starsIndex = 2 ;
 			} else if ( resultQuality > 0.1 ) {
-				starIndex = 1 ;
+				starsIndex = 1 ;
 			} else {
-				starIndex = 0;
+				starsIndex = 0;
 			};
-		$( '.stars' ).each( function( i ) {
-			//Changes class for each star as long as the proper amount of stars shines.
-			if ( i < starIndex) {
-				var innerSymbol = $( this );
-					innerSymbol.removeClass( 'stars-gold' );	
+		return starsIndex;
+    },
+
+	/** 
+	* @description: Add a class to each element of a group.
+    * @param: Amount of items that should have their class changed, actual class of the elements, name of the class to add, the delay between iterations in milliseconds. 
+    */
+	litTheStars : function( starsIndex , starElement , starShineClass , delayTime ) {
+			$( starElement ).each( function( i ) {
+			var innerSymbol = $( this );
+			innerSymbol.removeClass( starShineClass );	
+			if ( i < starsIndex) {
 					setTimeout( function() {
 						// Sets a brak before the user sees the animations.
-						innerSymbol.addClass( 'stars-gold' );
-    				}, i * 633); 
+						innerSymbol.addClass( starShineClass );
+    				}, i * delayTime ); 
 				};
 			});
 	},
@@ -448,7 +444,6 @@ var memoryGame = {
 	* @description: Resets the initial values of memoryGame variables and cleans HTML containers. 
 	*/
 	resetData : function() {
-		// Reset variables
 		memoryGame.pickedCard = '' ;
 		memoryGame.symbolsForTheGame = [] ;
 		memoryGame.gameMatrix = {} ;
@@ -460,9 +455,7 @@ var memoryGame = {
 		memoryGame.moves = 0 ;
 		memoryGame.tickTackCount = 0 ;
 		memoryGame.time = 'Time: 00:00:00' ;
-		// Stop the timer
 		memoryGame.stopTimer(); 
-		// Empty containers
 		memoryGame.updateTip( '' );
 		memoryGame.timerContainer.empty();
 		memoryGame.timerContainer.text( memoryGame.time );

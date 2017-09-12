@@ -10,8 +10,8 @@
 /* Global Classes */
 
 p {
-	margin: 0;
-	padding: 0;
+	margin: 0 ;
+	padding: 0 ;
 }
 
 li {
@@ -72,7 +72,7 @@ a {
 	justify-content: center ;
 	align-items: center ;
 	align-content: center ;
-	background-color:rgba( 61 , 75 , 81 , 0.51 ) ;
+	background-color:rgba( 61 , 75 , 81 , 0.51 );
 	text-align: center ;
 }
 
@@ -146,7 +146,7 @@ a {
 	margin: 5px ;
 } 
 
-.difficulty_button,
+.difficulty_button ,
 .play_again_button {
 	display: inline-flex ;
 	font-weight: 700 ;
@@ -190,8 +190,9 @@ a {
 
 .game_info {
 	margin: 0 ;
+	padding: 0 ;
 	color: #4f5c62 ;
-	font-size: 14px ;
+	font-size: 11px ;
 	text-transform: uppercase ;
 }
 .container_game_info p {
@@ -282,22 +283,53 @@ a {
 	animation:  winning 0.3s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
 }
 
+.feedback {
+	display: flex ;
+	flex-direction: row ;
+	height: 22px ;
+	margin: 10px 26px ;
+}
+
+.tip_container {
+	width: 90% ;
+}
+
 .tip_message {
-	position: absolute ;
-	margin-left: 2em ;
+	align-self: flex-start ;
+	width: 100% ;
+	font-size: 11px ;
 	font-weight: 400 ;
 	color: #e3d4a6 ;
 }
 
+.stars_container_small {
+	display: flex ;
+    width: 30% ;
+    justify-content: space-around ;
+    margin: 0 ;
+    padding: 0 ;
+    color: #2c3139 ;
+    list-style: none ;
+}
+
+.stars_small {
+	font-size: 11px ;
+	color: #23272D ;
+}
+
+.shine {
+	color: #3d4b51 ;
+}
+
 .nonono {
   animation: shake 0.2s cubic-bezier( 0.36 , 0.07 , 0.19 , 0.97 ) both ;
-  transform: translate3d( 0 , 0 , 0) ;
+  transform: translate3d( 0 , 0 , 0);
   backface-visibility: hidden ;
 }
 
 /* :) */
 .matching_cards {
-	box-shadow: inset 0px 0px 0px 1px rgba( 11 , 111 , 111 , 0.1) ;
+	box-shadow: inset 0px 0px 0px 1px rgba( 11 , 111 , 111 , 0.278 );
 }
 
 
@@ -345,72 +377,72 @@ a {
 
 @keyframes shake {
   10% , 90% {
-    transform: translate3d( -1px , 0 , 0 ) ;
+    transform: translate3d( -1px , 0 , 0 );
   }
   
   20% , 80% {
-    transform: translate3d( 3px , 0 , 0 ) ;
+    transform: translate3d( 3px , 0 , 0 );
   }
 
   30% , 50% , 70% {
-    transform: translate3d( -6px , 0 , 0 ) ;
+    transform: translate3d( -6px , 0 , 0 );
   }
 
   40% , 60% {
-    transform: translate3d( 6px , 0 , 0 ) ;
+    transform: translate3d( 6px , 0 , 0 );
   }
 }
 
 @keyframes bump {
   10% {
-    transform: scale3d( 1.1 , 1.1 , 1 ) ;
+    transform: scale3d( 1.1 , 1.1 , 1 );
   }
   
   20% {
-    transform: scale3d( 1.6 , 1.6 , 1 ) ;
+    transform: scale3d( 1.6 , 1.6 , 1 );
   }
 
   30% {
-  	transform: scale3d( 1.6 , 1.6 , 1 ) ;
+  	transform: scale3d( 1.6 , 1.6 , 1 );
     color: #e3d4a6 ;
   }
 
   40% , 60% {
-    transform: scale3d( 1.4 , 1.4 , 1 ) ;
+    transform: scale3d( 1.4 , 1.4 , 1 );
   }
 
   50% , 70% {
-  	transform: scale3d( 0.8 , 0.8 , 1 ) ;
+  	transform: scale3d( 0.8 , 0.8 , 1 );
   }
   80% {
-  	transform: scale3d( 1.1 , 1.1 , 1 ) ;
+  	transform: scale3d( 1.1 , 1.1 , 1 );
   }
   90% {
-  	transform: scale3d( 0.9 , 0.9 , 1 ) ;
+  	transform: scale3d( 0.9 , 0.9 , 1 );
   }
 }
 
 @keyframes winning {
   10% , 30% {
-    transform: scale3d( 1.2 , 1.2 , 1 ) ;
+    transform: scale3d( 1.2 , 1.2 , 1 );
     color: #e3d4a6 ;
   }
   
   20% {
-    transform: scale3d( 0.8 , 0.8 , 1 ) ;
+    transform: scale3d( 0.8 , 0.8 , 1 );
   }
 
   40% , 60% {
-    transform: scale3d( 1.1 , 1.1 , 1 ) ;
+    transform: scale3d( 1.1 , 1.1 , 1 );
   }
 
   50% , 70% {
-  	transform: scale3d( 0.9 , 0.9 , 1 ) ;
+  	transform: scale3d( 0.9 , 0.9 , 1 );
   }
   80% {
-  	transform: scale3d( 1.1 , 1.1 , 1 ) ;
+  	transform: scale3d( 1.1 , 1.1 , 1 );
   }
   90% {
-  	transform: scale3d( 0.9 , 0.9 , 1 ) ;
+  	transform: scale3d( 0.9 , 0.9 , 1 );
   }
 }
